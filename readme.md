@@ -175,16 +175,24 @@ Values: `development`, `production`
 
 Determine if it should load the development or the production version of modules
 
+#### options.endpoint
+
+See: https://github.com/imcuttle/module-to-cdn#optionsendpoint
+
+#### options.modules
+
+See: https://github.com/imcuttle/module-to-cdn#optionsmodules
+
 #### options.only
 
-Type: `Array<string>`
+Type: `Array<string|RegExp|(string) => boolean>`
 Default: `null`
 
 List the only modules that should be served by the cdn
 
 #### options.exclude
 
-Type: `Array<string>`
+Type: `Array<string|RegExp|(string) => boolean>`
 Default: `[]`
 
 List the modules that will always be bundled (not be served by the cdn)

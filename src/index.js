@@ -16,6 +16,23 @@ try {
 
 const moduleRegex = /^((?:@[a-z0-9][\w-.]+\/)?[a-z0-9][\w-.]*)/;
 
+const isMatched = (rule, value) => {
+    const _isMatched = (rule, value) => {
+        if (rule instanceof RegExp) {
+            return rule.test(value);
+        }
+        if (typeof rule === 'function') {
+            return rule(value);
+        }
+        return rule === value;
+    };
+
+    if (Array.isArray(rule)) {
+        return rule.some(r => _isMatched(r, value));
+    }
+    return _isMatched(rule, value);
+};
+
 const getEnvironment = mode => {
     switch (mode) {
         case 'none':
@@ -84,8 +101,8 @@ export default class DynamicCdnWebpackPlugin {
     }
 
     async addModule(contextPath, modulePath, {env}) {
-        const isModuleExcluded = this.exclude.includes(modulePath) ||
-            (this.only && !this.only.includes(modulePath));
+        const isModuleExcluded = isMatched(this.exclude, modulePath) ||
+            (this.only && !isMatched(this.only, modulePath));
         if (isModuleExcluded) {
             return false;
         }
@@ -103,7 +120,11 @@ export default class DynamicCdnWebpackPlugin {
             return false;
         }
 
-        const cdnConfig = await this.resolver(modulePath, version, {env, endpoint: this.endpoint, modules: this.modules});
+        const cdnConfig = await this.resolver(modulePath, version, {
+            env,
+            endpoint: this.endpoint,
+            modules: this.modules
+        });
 
         if (cdnConfig == null) {
             if (this.verbose) {
