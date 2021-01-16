@@ -41,7 +41,7 @@
     "html-webpack-include-assets-plugin": "^1.0.4",
     "read-pkg-up": "^4.0.0",
     "resolve-pkg": "^1.0.0",
-    "@moyuyc/module-to-cdn": "^3.1.5"
+    "@moyuyc/module-to-cdn": "^3.1.6"
   },
   "peerDependencies": {
     "webpack": "4"

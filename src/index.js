@@ -45,7 +45,7 @@ const getEnvironment = mode => {
 };
 
 export default class DynamicCdnWebpackPlugin {
-    constructor({disable = false, env, exclude, only, verbose, resolver, endpoint, modules} = {}) {
+    constructor({disable = false, env, exclude, only, verbose, resolver, endpoint, modules, versionSeg} = {}) {
         if (exclude && only) {
             throw new Error('You can\'t use \'exclude\' and \'only\' at the same time');
         }
@@ -58,6 +58,7 @@ export default class DynamicCdnWebpackPlugin {
         this.resolver = getResolver(resolver);
         this.endpoint = endpoint;
         this.modules = modules;
+        this.versionSeg = versionSeg;
 
         this.modulesFromCdn = {};
     }
@@ -123,6 +124,7 @@ export default class DynamicCdnWebpackPlugin {
         const cdnConfig = await this.resolver(modulePath, version, {
             env,
             endpoint: this.endpoint,
+            versionSeg: this.versionSeg,
             modules: this.modules
         });
 

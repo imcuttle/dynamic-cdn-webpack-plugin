@@ -183,6 +183,10 @@ See: https://github.com/imcuttle/module-to-cdn#optionsendpoint
 
 See: https://github.com/imcuttle/module-to-cdn#optionsmodules
 
+#### options.versionSeg
+
+See: https://github.com/imcuttle/module-to-cdn#optionsversionseg
+
 #### options.only
 
 Type: `Array<string|RegExp|(string) => boolean>`
