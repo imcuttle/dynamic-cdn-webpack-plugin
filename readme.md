@@ -78,7 +78,7 @@ import { BrowserRouter } from 'react-router-dom';
     <title>Webpack App</title>
   </head>
   <body>
-    <script type="text/javascript" src="https://unpkg.com/react@15.5.3/dist/react.min.js"></script><script type="text/javascript" src="https://unpkg.com/react-router-dom@4.1.1/umd/react-router-dom.min.js"></script><script src="build/app.js"></script></body>
+    <script type="text/javascript" src="//unpkg.com/react@15.5.3/dist/react.min.js"></script><script type="text/javascript" src="//unpkg.com/react-router-dom@4.1.1/umd/react-router-dom.min.js"></script><script src="build/app.js"></script></body>
 </html>
 ```
 
@@ -138,8 +138,8 @@ import { BrowserRouter } from 'react-router-dom';
 ```json
 {
     "app.js": "app.js",
-    "react.js": "https://unpkg.com/react@15.5.3/dist/react.min.js",
-    "react-router-dom.js": "https://unpkg.com/react-router-dom@4.1.1/umd/react-router-dom.min.js"
+    "react.js": "//unpkg.com/react@15.5.3/dist/react.min.js",
+    "react-router-dom.js": "//unpkg.com/react-router-dom@4.1.1/umd/react-router-dom.min.js"
 }
 ```
 
@@ -198,7 +198,7 @@ Log whether the library is being served by the cdn or is bundled
 
 #### options.resolver
 Type: `string`, `function`<br>
-Default: `'module-to-cdn'`
+Default: `'@moyuyc/module-to-cdn'`
 
 Allow you to define a custom module resolver, it can either be a `function` or an npm module.
 The resolver should return (or resolve as a Promise) either `null` or an `object` with the keys: `name`, `var`, `url`, `version`.

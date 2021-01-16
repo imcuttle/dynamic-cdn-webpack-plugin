@@ -33,7 +33,7 @@ test('basic', async t => {
 
     t.is(files.length, 2);
     t.true(files.includes('app.js'));
-    t.true(files.includes('https://unpkg.com/react@15.6.1/dist/react.js'));
+    t.true(files.includes('//unpkg.com/react@15.6.1/dist/react.js'));
 
     const output = await fs.readFile(path.resolve(__dirname, './fixtures/output/basic/app.js'));
 
@@ -71,7 +71,7 @@ test('using production version', async t => {
 
     t.is(files.length, 2);
     t.true(files.includes('app.js'));
-    t.true(files.includes('https://unpkg.com/react@15.6.1/dist/react.min.js'));
+    t.true(files.includes('//unpkg.com/react@15.6.1/dist/react.min.js'));
 
     const output = await fs.readFile(path.resolve(__dirname, './fixtures/output/env-prod/app.js'));
 
@@ -106,7 +106,7 @@ test('with mode=production', async t => {
 
     t.is(files.length, 2);
     t.true(files.includes('app.js'));
-    t.true(files.includes('https://unpkg.com/react@15.6.1/dist/react.min.js'));
+    t.true(files.includes('//unpkg.com/react@15.6.1/dist/react.min.js'));
 
     const output = await fs.readFile(path.resolve(__dirname, './fixtures/output/node-env-prod/app.js'));
 
@@ -164,9 +164,9 @@ test('peerDependencies', async t => {
 
     t.is(files.length, 4);
     t.true(files.includes('app.js'));
-    t.true(files.includes('https://unpkg.com/@angular/core@4.2.4/bundles/core.umd.js'));
-    t.true(files.includes('https://unpkg.com/rxjs@5.4.1/bundles/Rx.js'));
-    t.true(files.includes('https://unpkg.com/zone.js@0.8.12/dist/zone.js'));
+    t.true(files.includes('//unpkg.com/@angular/core@4.2.4/bundles/core.umd.js'));
+    t.true(files.includes('//unpkg.com/rxjs@5.4.1/bundles/Rx.js'));
+    t.true(files.includes('//unpkg.com/zone.js@0.8.12/dist/zone.js'));
 });
 
 test('load module without export', async t => {
@@ -193,7 +193,7 @@ test('load module without export', async t => {
 
     t.is(files.length, 2);
     t.true(files.includes('app.js'));
-    t.true(files.includes('https://unpkg.com/babel-polyfill@6.23.0/dist/polyfill.js'));
+    t.true(files.includes('//unpkg.com/babel-polyfill@6.23.0/dist/polyfill.js'));
 });
 
 test('exclude some modules', async t => {
@@ -222,7 +222,7 @@ test('exclude some modules', async t => {
 
     t.is(files.length, 1);
     t.true(files.includes('app.js'));
-    t.false(files.includes('https://unpkg.com/react@15.6.1/dist/react.js'));
+    t.false(files.includes('//unpkg.com/react@15.6.1/dist/react.js'));
 
     const output = await fs.readFile(path.resolve(__dirname, './fixtures/output/exclude/app.js'));
 
@@ -257,9 +257,9 @@ test('only include some modules', async t => {
 
     t.is(files.length, 2);
     t.true(files.includes('app.js'));
-    t.true(files.includes('https://unpkg.com/react@15.6.1/dist/react.js'));
-    t.false(files.includes('https://unpkg.com/babel-polyfill@6.23.0/dist/polyfill.js'));
-    t.false(files.includes('https://unpkg.com/react-dom@15.6.1/dist/react-dom.js'));
+    t.true(files.includes('//unpkg.com/react@15.6.1/dist/react.js'));
+    t.false(files.includes('//unpkg.com/babel-polyfill@6.23.0/dist/polyfill.js'));
+    t.false(files.includes('//unpkg.com/react-dom@15.6.1/dist/react-dom.js'));
 
     const output = await fs.readFile(path.resolve(__dirname, './fixtures/output/only/app.js'));
 
@@ -324,7 +324,7 @@ test.serial('verbose options to output which modules are loaded from CDN / which
         ]
     });
 
-    t.true(logs.includes('✔️ \'react\' will be served by https://unpkg.com/react@15.6.1/dist/react.js'));
+    t.true(logs.includes('✔️ \'react\' will be served by //unpkg.com/react@15.6.1/dist/react.js'));
     t.true(logs.includes('❌ \'a\' couldn\'t be found, please add it to https://github.com/mastilver/module-to-cdn/blob/master/modules.json'));
 
     console.log = originalLog;
@@ -354,7 +354,7 @@ test('require files without extension', async t => {
 
     t.is(files.length, 1);
     t.true(files.includes('app.js'));
-    t.false(files.includes('https://unpkg.com/react@15.6.1/dist/react.js'));
+    t.false(files.includes('//unpkg.com/react@15.6.1/dist/react.js'));
 });
 
 test('async loading', async t => {
@@ -380,9 +380,9 @@ test('async loading', async t => {
     const files = stats.compilation.chunks.reduce((files, x) => files.concat(x.files), []);
 
     t.true(files.includes('app.js'));
-    t.true(files.includes('https://unpkg.com/react@15.6.1/dist/react.js'));
+    t.true(files.includes('//unpkg.com/react@15.6.1/dist/react.js'));
 
-    const outputs = await Promise.all(files.filter(x => !x.startsWith('https://unpkg.com')).map(async file => {
+    const outputs = await Promise.all(files.filter(x => !x.startsWith('//unpkg.com')).map(async file => {
         return fs.readFile(path.resolve(__dirname, `./fixtures/output/async/${file}`));
     }));
 
@@ -414,7 +414,7 @@ test('when using multiple versions of a module, make sure the right version is u
     const files = stats.compilation.chunks.reduce((files, x) => files.concat(x.files), []);
 
     t.true(files.includes('app.js'));
-    t.true(files.includes('https://unpkg.com/react@15.6.1/dist/react.js'));
+    t.true(files.includes('//unpkg.com/react@15.6.1/dist/react.js'));
 
     let output = await fs.readFile(path.resolve(__dirname, './fixtures/output/multiple-versions/app.js'));
     output = output.toString();
@@ -496,13 +496,13 @@ test('when one peerDependency fails, do not load from cdn', async t => {
                         '@angular/core': {
                             var: 'ng',
                             name: 'angular',
-                            url: 'https://unpkg.com/@angular/core@4.2.4/bundles/core.umd.js',
+                            url: '//unpkg.com/@angular/core@4.2.4/bundles/core.umd.js',
                             version: '4.2.4'
                         },
                         rxjs: {
                             var: 'Rx',
                             name: 'rxjs',
-                            url: 'https://unpkg.com/rxjs@5.4.1/bundles/Rx.js',
+                            url: '//unpkg.com/rxjs@5.4.1/bundles/Rx.js',
                             version: '5.4.1'
                         }
                     }[name];
@@ -515,9 +515,9 @@ test('when one peerDependency fails, do not load from cdn', async t => {
 
     t.is(files.length, 2);
     t.true(files.includes('app.js'));
-    t.false(files.includes('https://unpkg.com/@angular/core@4.2.4/bundles/core.umd.js'));
-    t.true(files.includes('https://unpkg.com/rxjs@5.4.1/bundles/Rx.js'));
-    t.false(files.includes('https://unpkg.com/zone.js@0.8.12/dist/zone.js'));
+    t.false(files.includes('//unpkg.com/@angular/core@4.2.4/bundles/core.umd.js'));
+    t.true(files.includes('//unpkg.com/rxjs@5.4.1/bundles/Rx.js'));
+    t.false(files.includes('//unpkg.com/zone.js@0.8.12/dist/zone.js'));
 
     let output = await fs.readFile(path.resolve(__dirname, './fixtures/output/failing-peer-dependency/app.js'));
     output = output.toString();
@@ -597,7 +597,7 @@ test('when used with NamedModulesPlugin', async t => {
 
     t.is(files.length, 2);
     t.true(files.includes('app.js'));
-    t.true(files.includes('https://unpkg.com/react@15.6.1/dist/react.js'));
+    t.true(files.includes('//unpkg.com/react@15.6.1/dist/react.js'));
 
     const output = await fs.readFile(path.resolve(__dirname, './fixtures/output/named-modules/app.js'));
 

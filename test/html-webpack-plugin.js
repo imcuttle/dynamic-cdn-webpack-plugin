@@ -33,7 +33,7 @@ test('html-webpack-plugin', async t => {
     const indexFile = await fs.readFile(path.resolve(__dirname, './fixtures/output/html-webpack-plugin/index.html'), {encoding: 'utf-8'});
 
     t.true(indexFile.includes('src="/app.js"'));
-    t.true(indexFile.includes('src="https://unpkg.com/react@15.6.1/dist/react.js"'));
+    t.true(indexFile.includes('src="//unpkg.com/react@15.6.1/dist/react.js"'));
 
     const output = await fs.readFile(path.resolve(__dirname, './fixtures/output/html-webpack-plugin/app.js'));
 

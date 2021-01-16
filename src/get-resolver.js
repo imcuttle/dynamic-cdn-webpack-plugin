@@ -1,4 +1,4 @@
-export default function getResolver(resolver = 'module-to-cdn') {
+export default function getResolver(resolver = '@moyuyc/module-to-cdn') {
     if (typeof resolver === 'function') {
         return resolver;
     }
